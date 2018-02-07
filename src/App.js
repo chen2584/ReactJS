@@ -3,8 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import TestPage1 from './components/test1/test1';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
 
 class App extends React.Component {
+
+  componentDidMount()
+  {
+    this.props.setName2();
+    //this.props.dispatch({type: "setName", payload: "Force Dispatch"})
+    console.log(this.props);
+  }
+
+
   render() {
     let chen = 1;
     return (
@@ -17,8 +28,10 @@ class App extends React.Component {
           <hr />
           
           <Switch>
-            <Route exact path='/Login' component={TestPage1} />
+            <Route path='/Login/:chen' component={TestPage1} />
           </Switch>
+
+          {this.props.store.name}
         </div>
       </Router>
     );
@@ -26,4 +39,24 @@ class App extends React.Component {
 
 }
 
-export default App;
+const testProps = () => ({
+  //return dispatch({type: "setName", payload: "Sawaddee!"});
+  type: "setName", payload: "Sawaddeea!"
+});
+
+const testProps2 = () => ({
+  //return dispatch({type: "setName", payload: "Sawaddee!"});
+  type: "setName", payload: "Arunsawad!"
+});
+
+export default connect(
+  (state) => ({ store: state }),
+  {
+    setName: testProps,
+    setName2: testProps2
+  }
+)(App);
+
+
+
+//export default connect(, )();

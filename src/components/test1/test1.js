@@ -8,6 +8,7 @@ export default class TestPage1 extends Component {
             <div>
                 <h1 className="chen">This is Test1 Page</h1>
                 <Link to='/'>go to home page</Link>
+                <h5>{this.props.chen}</h5>
             </div>
         );
     }
